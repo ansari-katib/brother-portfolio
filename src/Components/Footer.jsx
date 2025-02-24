@@ -1,7 +1,15 @@
 import React from "react";
 import { FaInstagram, FaTwitter } from "react-icons/fa"; // Importing social icons
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+
+  const routes = [
+    { text: "Home", path: "/" },
+    { text: "Gallery", path: "/gallery" },
+    { text: "Experience", path: "/experience" },
+  ];
+
   return (
     <footer className="bg-blue-100 text-blue-700 py-6 mt-6">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
@@ -10,10 +18,19 @@ const Footer = () => {
         <div className="text-2xl font-bold">🎂 Pastry Chef</div>
 
         {/* Navigation Links */}
-        <ul className="flex space-x-6 mt-4 md:mt-0">
-          <li><a href="/" className="hover:text-blue-500 transition">Home</a></li>
-          <li><a href="/gallery" className="hover:text-blue-500 transition">Gallery</a></li>
-          <li><a href="/experience" className="hover:text-blue-500 transition">Experience</a></li>
+        <ul className="hidden md:flex space-x-6">
+          {routes.map((route, index) => (
+            <li key={index}>
+              <NavLink 
+                to={route.path} 
+                className={({ isActive }) => 
+                  `hover:text-blue-500 transition ${isActive ? "text-blue-700 font-bold" : ""}`
+                }
+              >
+                {route.text}
+              </NavLink>
+            </li>
+          ))}
         </ul>
 
         {/* Social Media Icons */}
